@@ -16,7 +16,9 @@ public class Episode {
     private UUID id;
     private String name;
     private String synopsis;
-    private String order;
+
+    @Column(name = "episode_order")
+    private Integer order;
     private String videoUrl;
     private Long secondsLong;
 
@@ -27,20 +29,15 @@ public class Episode {
     @OneToMany(mappedBy = "id.episode", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<WatchTime> watchTimes = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "episode_id")
-    private Episode episode;
-
     public Episode() { }
 
     private Episode(
             UUID id,
             Long secondsLong,
             String videoUrl,
-            String order,
+            Integer order,
             String synopsis,
-            String name,
-            Episode episode
+            String name
     ) {
         this.id = id;
         this.secondsLong = secondsLong;
@@ -48,19 +45,18 @@ public class Episode {
         this.order = order;
         this.synopsis = synopsis;
         this.name = name;
-        this.episode = episode;
     }
 
     public static Episode from(
             UUID id,
             Long secondsLong,
             String videoUrl,
-            String order,
+            Integer order,
             String synopsis,
             String name,
             Episode episode
     ) {
-        return new Episode(id, secondsLong, videoUrl, order, synopsis, name, episode);
+        return new Episode(id, secondsLong, videoUrl, order, synopsis, name);
     }
 
     public UUID getId() {
@@ -87,11 +83,11 @@ public class Episode {
         this.synopsis = synopsis;
     }
 
-    public String getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(String order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 
@@ -111,12 +107,16 @@ public class Episode {
         this.secondsLong = secondsLong;
     }
 
-    public Episode getEpisode() {
-        return episode;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setEpisode(Episode episode) {
-        this.episode = episode;
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Set<WatchTime> getWatchTimes() {
+        return watchTimes;
     }
 
     @Override

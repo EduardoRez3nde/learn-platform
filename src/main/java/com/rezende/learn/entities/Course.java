@@ -20,7 +20,7 @@ public class Course {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "episode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Episode> episodes = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.course", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -45,7 +45,6 @@ public class Course {
         this.thumbnailUrl = thumbnailUrl;
         this.featured = featured;
         this.category = category;
-        this.episodes = episodes;
     }
 
     public static Course from(

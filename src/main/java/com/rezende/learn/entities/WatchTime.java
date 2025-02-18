@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_favorite")
+@Table(name = "tb_watch_time")
 public class WatchTime {
 
     @EmbeddedId

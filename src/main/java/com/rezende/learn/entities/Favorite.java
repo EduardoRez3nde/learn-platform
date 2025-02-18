@@ -1,7 +1,6 @@
 package com.rezende.learn.entities;
 
 import com.rezende.learn.entities.pk.FavoritePK;
-import com.rezende.learn.entities.pk.LikePK;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -13,13 +12,8 @@ public class Favorite {
     @EmbeddedId
     private FavoritePK id = new FavoritePK();
 
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant createdAt;
-
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-    private Instant updatedAt;
-
-    public Favorite() {}
+    public Favorite() {
+    }
 
     private Favorite(User user, Course course) {
         id.setUser(user);
@@ -44,15 +38,5 @@ public class Favorite {
 
     public void setCourse(Course course) {
         id.setCourse(course);
-    }
-
-    @PrePersist
-    public void prePersist() {
-        createdAt = Instant.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updatedAt = Instant.now();
     }
 }
