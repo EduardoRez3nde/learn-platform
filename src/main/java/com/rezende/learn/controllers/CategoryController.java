@@ -22,8 +22,8 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<CategoryAndCourseDTO> findById(@PathVariable("id") UUID id) {
+    @GetMapping(value = "/{categoryId}")
+    public ResponseEntity<CategoryAndCourseDTO> findById(@PathVariable("categoryId") UUID id) {
         return ResponseEntity.ok(categoryService.findById(id));
     }
 

@@ -13,7 +13,7 @@ public class CourseDTO {
 
     public CourseDTO() { }
 
-    private CourseDTO(UUID id, String name, String synopsis, String thumbnailUrl) {
+    protected CourseDTO(UUID id, String name, String synopsis, String thumbnailUrl) {
         this.id = id;
         this.name = name;
         this.synopsis = synopsis;

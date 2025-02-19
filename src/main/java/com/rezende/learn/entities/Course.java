@@ -2,6 +2,7 @@ package com.rezende.learn.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.*;
 
 @Entity
@@ -16,7 +17,13 @@ public class Course {
     private String thumbnailUrl;
     private boolean featured;
 
-    @ManyToOne
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant createdAt;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -108,6 +115,16 @@ public class Course {
 
     public List<Episode> getEpisodes() {
         return episodes;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedAt = Instant.now();
     }
 
     @Override
