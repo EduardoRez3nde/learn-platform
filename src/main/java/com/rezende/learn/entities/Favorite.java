@@ -4,6 +4,7 @@ import com.rezende.learn.entities.pk.FavoritePK;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_favorite")
@@ -38,5 +39,9 @@ public class Favorite {
 
     public void setCourse(Course course) {
         id.setCourse(course);
+    }
+
+    public FavoritePK getId() {
+        return id;
     }
 }

@@ -65,6 +65,7 @@ public class Course {
         return new Course(id, name, synopsis, thumbnailUrl, featured, category);
     }
 
+
     public UUID getId() {
         return id;
     }

@@ -32,6 +32,12 @@ public class WatchTime {
         return new WatchTime(user, episode);
     }
 
+    public static WatchTime from(User user, Episode episode, Long seconds) {
+        WatchTime watchTime = WatchTime.from(user, episode);
+        watchTime.setSeconds(seconds);
+        return watchTime;
+    }
+
     public User getUser() {
         return id.getUser();
     }

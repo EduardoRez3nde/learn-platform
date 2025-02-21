@@ -1,0 +1,30 @@
+package com.rezende.learn.controllers;
+
+import com.rezende.learn.dto.FavoriteDTO;
+import com.rezende.learn.services.FavoriteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.UUID;
+
+@RestController
+@RequestMapping(value = "/favorites")
+public class FavoriteController {
+
+    @Autowired
+    private FavoriteService favoriteService;
+
+    @PostMapping(value = "/{courseId}")
+    public ResponseEntity<FavoriteDTO> addFavorite(
+            @RequestParam(value = "userId") UUID userId,
+            @PathVariable(value = "courseId") UUID courseId) {
+
+        FavoriteDTO dto = favoriteService.addFavorite(userId, courseId);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{courseId}")
+                .buildAndExpand(dto.getUserId(), dto.getCourseId()).toUri();
+        return ResponseEntity.created(uri).body(dto);
+    }
+}

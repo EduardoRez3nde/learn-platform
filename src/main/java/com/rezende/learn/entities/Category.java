@@ -35,9 +35,18 @@ public class Category {
         this.name = name;
         this.position = position;
     }
-    
+
+    private Category(String name, Integer position) {
+        this.name = name;
+        this.position = position;
+    }
+
     public static Category from(UUID id, String name, Integer position) {
         return new Category(id, name, position);
+    }
+
+    public static Category from(String name, Integer position) {
+        return new Category(name, position);
     }
 
     public UUID getId() {

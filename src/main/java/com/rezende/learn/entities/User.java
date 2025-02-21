@@ -31,6 +31,13 @@ public class User {
     @OneToMany(mappedBy = "id.user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final Set<WatchTime> watchTimes = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private final Set<Role> roles = new HashSet<>();
+
     public User() { }
 
     private User(
@@ -117,6 +124,22 @@ public class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Set<Like> getLikes() {
+        return likes;
+    }
+
+    public Set<Favorite> getFavorites() {
+        return favorites;
+    }
+
+    public Set<WatchTime> getWatchTimes() {
+        return watchTimes;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
     }
 
     @Override

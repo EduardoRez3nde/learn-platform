@@ -18,12 +18,21 @@ public class CategoryDTO {
         this.position = position;
     }
 
+    private CategoryDTO(String name, Integer position) {
+        this.name = name;
+        this.position = position;
+    }
+
     public static CategoryDTO from(UUID id, String name, Integer position) {
         return new CategoryDTO(id, name, position);
     }
 
     public static CategoryDTO of(Category category) {
         return new CategoryDTO(category.getId(), category.getName(), category.getPosition());
+    }
+
+    public static CategoryDTO of(String name, Integer position) {
+        return new CategoryDTO(name, position);
     }
 
     public UUID getId() {
