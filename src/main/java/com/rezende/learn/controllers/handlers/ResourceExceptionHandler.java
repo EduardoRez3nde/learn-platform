@@ -16,7 +16,7 @@ public class ResourceExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<CustomErrorDTO> resourceNotFoundException(ResourceNotFoundException e, HttpServletRequest req) {
-        Integer status = HttpStatus.BAD_REQUEST.value();
+        Integer status = HttpStatus.NOT_FOUND.value();
         CustomErrorDTO error = new CustomErrorDTO(Instant.now(), status, e.getMessage(), req.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }

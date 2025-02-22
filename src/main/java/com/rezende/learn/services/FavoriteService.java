@@ -47,4 +47,27 @@ public class FavoriteService {
                 () -> new ResourceNotFoundException("User with id %s not found", userId));
         return UserAndFavoriteDTO.of(user);
     }
+
+    @Transactional
+    public String deleteFavorite(UUID userId, UUID courseId) {
+        User user = userRepository.getReferenceById(userId);
+        Course course = courseRepository.getReferenceById(courseId);
+        Favorite favorite = Favorite.from(user, course);
+
+        favoriteRepository.findById(favorite.getId())
+            .ifPresentOrElse(f -> favoriteRepository.delete(f), () -> {
+                throw new ResourceNotFoundException("Favorite not found");
+            });
+        return String.format("message: Favorite deleted successfully");
+    }
+
+    @Transactional(readOnly = true)
+    public Boolean isFavorite(UUID userId, UUID courseId) {
+        User user = userRepository.getReferenceById(userId);
+        Course course = courseRepository.getReferenceById(courseId);
+        Favorite favorite = Favorite.from(user, course);
+        favoriteRepository.findById(favorite.getId())
+            .orElseThrow(() -> new ResourceNotFoundException("Favorite not found"));
+        return true;
+    }
 }

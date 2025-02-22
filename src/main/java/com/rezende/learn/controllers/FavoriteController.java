@@ -34,4 +34,20 @@ public class FavoriteController {
         UserAndFavoriteDTO dto = favoriteService.findFavorites(userId);
         return ResponseEntity.ok(dto);
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteFavorite(
+            @RequestParam(value = "userId") UUID userId,
+            @RequestParam(value = "courseId") UUID courseId) {
+        String message = favoriteService.deleteFavorite(userId, courseId);
+        return ResponseEntity.ok(message);
+    }
+
+    @GetMapping(value = "/isFavorite")
+    public ResponseEntity<Boolean> isFavorite(
+            @RequestParam(value = "userId") UUID userId,
+            @RequestParam(value = "courseId") UUID courseId) {
+        Boolean isFavorite = favoriteService.isFavorite(userId, courseId);
+        return ResponseEntity.ok(isFavorite);
+    }
 }
