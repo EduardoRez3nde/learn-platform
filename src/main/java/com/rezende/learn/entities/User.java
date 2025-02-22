@@ -1,16 +1,15 @@
 package com.rezende.learn.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -58,6 +57,12 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    public User(String username, String password, Set<Role> authorities) {
+        this.email = username;
+        this.password = password;
+        this.roles.addAll(authorities);
+    }
+
     public static User from(
             UUID id,
             String firstname,
@@ -68,6 +73,10 @@ public class User {
             LocalDate birthDate
     ) {
         return new User(id, firstname, lastname, email, phone, password, birthDate);
+    }
+
+    public static User from(String username, String password, Set<Role> authorities) {
+        return new User(username, password, authorities);
     }
 
     public UUID getId() {
@@ -140,6 +149,41 @@ public class User {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+
+    public String fullName() {
+        return firstname + " " + lastname;
     }
 
     @Override

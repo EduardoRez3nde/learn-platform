@@ -4,6 +4,7 @@ import com.rezende.learn.entities.pk.LikePK;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_like")
@@ -53,5 +54,9 @@ public class Like {
     @PreUpdate
     public void preUpdate() {
         updatedAt = Instant.now();
+    }
+
+    public LikePK getId() {
+        return id;
     }
 }
