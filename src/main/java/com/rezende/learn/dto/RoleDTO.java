@@ -2,14 +2,16 @@ package com.rezende.learn.dto;
 
 import com.rezende.learn.entities.Role;
 
+import java.util.UUID;
+
 public class RoleDTO {
 
-    private Long id;
+    private UUID id;
     private String authority;
 
     public RoleDTO() {}
 
-    public RoleDTO(Long id, String authority) {
+    public RoleDTO(UUID id, String authority) {
         this.id = id;
         this.authority = authority;
     }
@@ -20,11 +22,11 @@ public class RoleDTO {
     }
 
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

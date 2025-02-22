@@ -15,8 +15,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String firstName;
-    private String lastName;
+    private String firstname;
+    private String lastname;
     private String email;
     private String phone;
     private String password;
@@ -42,16 +42,16 @@ public class User {
 
     private User(
             UUID id,
-            String firstName,
-            String lastName,
+            String firstname,
+            String lastname,
             String email,
             String phone,
             String password,
             LocalDate birthDate
     ) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.phone = phone;
         this.password = password;
@@ -60,14 +60,14 @@ public class User {
 
     public static User from(
             UUID id,
-            String firstName,
-            String lastName,
+            String firstname,
+            String lastname,
             String email,
             String phone,
             String password,
             LocalDate birthDate
     ) {
-        return new User(id, firstName, lastName, email, phone, password, birthDate);
+        return new User(id, firstname, lastname, email, phone, password, birthDate);
     }
 
     public UUID getId() {
@@ -78,20 +78,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {

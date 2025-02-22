@@ -42,8 +42,8 @@ public class UserDTO {
     public static UserDTO of(User user) {
         return new UserDTO(
                 user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
+                user.getFirstname(),
+                user.getLastname(),
                 user.getPhone(),
                 user.getBirthDate(),
                 user.getEmail());

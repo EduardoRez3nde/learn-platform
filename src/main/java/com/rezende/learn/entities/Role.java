@@ -3,6 +3,7 @@ package com.rezende.learn.entities;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tb_role")
@@ -10,23 +11,23 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false)
     private String authority;
 
     public Role() {}
 
-    public Role(Long id, String authority) {
+    public Role(UUID id, String authority) {
         this.id = id;
         this.authority = authority;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -42,11 +43,11 @@ public class Role {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return Objects.equals(id, role.id);
+        return Objects.equals(getId(), role.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(getId());
     }
 }
